@@ -16,3 +16,8 @@ Activate `virtualenv`
 ```
 $ source env/bin/activate
 ```
+Run the server (with virtualenv running)
+```
+(venv)$ python server.py
+```
+The server will be running on `http://0.0.0.0:8080/`
