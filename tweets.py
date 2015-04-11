@@ -23,7 +23,7 @@ def downloadTweets(name):
 	else:
 		print "request tweets failed, please retry."
 
-#downloadTweets("AshraufK")
+#downloadTweets("AshraufK") 
 def is_ascii(s):
 	return all(ord(c) < 128 for c in s)
 
