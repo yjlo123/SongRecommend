@@ -1,6 +1,5 @@
 import nltk
 import pickle
-from textblob.classifiers import NaiveBayesClassifier
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 import operator
@@ -61,4 +60,4 @@ def generate():
 
 def process(text):
 	global color_dict
-	print getColorFromText(color_dict, text)
+	return getColorFromText(color_dict, text)

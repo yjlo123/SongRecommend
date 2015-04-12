@@ -19,11 +19,10 @@ def downloadTweets(name):
 				output.close()
 				break
 			except urllib2.HTTPError as e:
-				print e.code + " retry("+str(i+1)+")"
+				print "retry("+str(i+1)+")"
 	else:
 		print "request tweets failed, please retry."
 
-#downloadTweets("AshraufK") 
 def is_ascii(s):
 	return all(ord(c) < 128 for c in s)
 
@@ -40,5 +39,12 @@ def getRecentTweets(name):
 				text += (" "+content)
 	return text
 
-color.load()
-color.process(getRecentTweets("kimberly_chia"))
+def init():
+	color.load()
+
+def user_to_color(name):
+	downloadTweets(name) 
+	return color.process(getRecentTweets(name))
+
+init()
+print user_to_color("ongxavier")
