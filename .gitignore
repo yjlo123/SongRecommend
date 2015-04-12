@@ -1,1 +1,6 @@
-*.txt
+.DS_Store
+env
+data
+tweets
+.cache*
+*.pyc
