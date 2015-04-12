@@ -1,8 +1,10 @@
-from flask import Flask
-from flask import *
+import os
 import spotipy
 import spotipy.util as util
-import os
+from flask import Flask
+from flask import *
+import tweets
+import fb
 
 os.environ['SPOTIPY_CLIENT_ID']     = '80d72b0f268d4e7db2ffd1e70d79be31'
 os.environ['SPOTIPY_CLIENT_SECRET'] = '57f4a3f15b7a4399b3c6e6acab190221'
@@ -30,8 +32,15 @@ def spotify_login(username=None):
   token = util.prompt_for_user_token(scope)
   return redirect(url_for('index', token = token))
 
-@app.route('/twitter')
-def twitter_login():
+@app.route('/twitter/<username>')
+def twitter():
+  tweets.init()
+  colors = tweets.user_to_color(username)
+  return colors
+
+@app.route('/like')
+def like():
+  fb.postToFireBase(color, None, song)
   pass
 
 
