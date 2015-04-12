@@ -17,11 +17,12 @@ def index():
     sp = spotipy.Spotify(auth=token)
     results = sp.current_user_saved_tracks()
     profile = sp.me()
-    print profile['birthdate']
-    print profile['country']
-    return render_template('index.html', results=results, profile=profile)
   else:
-    return 'It works!'
+    results = None
+    profile = None
+  twitter = request.args.get('twitter', '')
+
+  return render_template('index.html', token=token, results=results, profile=profile, twitter=twitter)
 
 @app.route('/spotify')
 def spotify_login(username=None):
@@ -29,7 +30,7 @@ def spotify_login(username=None):
   token = util.prompt_for_user_token(scope)
   return redirect(url_for('index', token = token))
 
-@app.route('/twitter/login')
+@app.route('/twitter')
 def twitter_login():
   pass
 

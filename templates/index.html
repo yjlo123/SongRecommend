@@ -1,14 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h2>Login to Twitter</h2>
-  <form action="{{ url_for('twitter_login') }}" method=post>
-    <dl>
-      <dt>Username:
-      <dd><input type=text name=username>
-      <dd><input type=submit value=Login>
-    </dl>
-  </form>
-
+  <!-- Spotify Login -->
   {% if profile %}
     Logged in as {{ profile['display_name'] }}
     <img src="{{ profile['images'][0]['url'] }}" style="width: 40px; border-radius: 50%;">
@@ -27,7 +19,7 @@
     <h3>List of Spotify tracks:</h3>
     <ul class=tracks>
     {% for item in results['items'] %}
-      <li><h2>{{ item['track']['name'] }}</h2>{{ item['track']['artists'][0]['name'] }}</li>
+      <li><h4>{{ item['track']['name'] }} - {{ item['track']['artists'][0]['name'] }}</h4></li>
     {% else %}
       No tracks found!
     {% endfor %}
@@ -36,4 +28,20 @@
   {% else %}
     <h3>Login to Spotify to get tracks!</h3>
   {% endif %}
+
+  <!-- Twitter login -->
+  {% if twitter %}
+    <h2>Logged in to Twitter</h2>
+  {% else %}
+    <h2>Login to Twitter</h2>
+  {% endif %}
+  <form action="{{ url_for('index', token=token, twitter=username) }}" method=get>
+    <dl>
+      <dt>Username:
+      <dd><input type=text name=twitter value="{{ twitter }}"></dd>
+      <dd><input type=text name=token value="{{ token }}" style="visibility: hidden;"></dd>
+      <dd><input type=submit value=Login></dd>
+    </dl>
+  </form>
+
 {% endblock %}
