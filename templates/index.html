@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Login to Twitter</h2>
+  <form action="{{ url_for('twitter_login') }}" method=post>
+    <dl>
+      <dt>Username:
+      <dd><input type=text name=username>
+      <dd><input type=submit value=Login>
+    </dl>
+  </form>
+
+  {% if profile %}
+    Logged in as {{ profile['display_name'] }}
+    <img src="{{ profile['images'][0]['url'] }}" style="width: 40px; border-radius: 50%;">
+    <dl>
+      <dt>Birthdate</dt>
+      <dd>{{ profile['birthdate'] }}</dd>
+      <dt>Country</dt>
+      <dd>{{ profile['country'] }}</dd>
+    </dl>
+    
+  {% else %}
+    <a href="{{ url_for('spotify_login') }}">Login to Spotify</a>
+  {% endif %}
+
+  {% if results %}
+    <h3>List of Spotify tracks:</h3>
+    <ul class=tracks>
+    {% for item in results['items'] %}
+      <li><h2>{{ item['track']['name'] }}</h2>{{ item['track']['artists'][0]['name'] }}</li>
+    {% else %}
+      No tracks found!
+    {% endfor %}
+    </ul>
+
+  {% else %}
+    <h3>Login to Spotify to get tracks!</h3>
+  {% endif %}
+{% endblock %}

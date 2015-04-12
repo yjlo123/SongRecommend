@@ -2,21 +2,26 @@ from flask import Flask
 from flask import *
 import spotipy
 import spotipy.util as util
+import os
+
+os.environ['SPOTIPY_CLIENT_ID']     = '80d72b0f268d4e7db2ffd1e70d79be31'
+os.environ['SPOTIPY_CLIENT_SECRET'] = '57f4a3f15b7a4399b3c6e6acab190221'
+os.environ['SPOTIPY_REDIRECT_URI']  = 'http://localhost:8080/'
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
   token = request.args.get('token', '')
-  output = ''
   if token:
     sp = spotipy.Spotify(auth=token)
     results = sp.current_user_saved_tracks()
-    for item in results['items']:
-      track = item['track']
-      output = output + track['name'] + ' '
-
-  return output
+    profile = sp.me()
+    print profile['birthdate']
+    print profile['country']
+    return render_template('index.html', results=results, profile=profile)
+  else:
+    return 'It works!'
 
 @app.route('/spotify')
 def spotify_login(username=None):
@@ -24,6 +29,9 @@ def spotify_login(username=None):
   token = util.prompt_for_user_token(scope)
   return redirect(url_for('index', token = token))
 
+@app.route('/twitter/login')
+def twitter_login():
+  pass
 
 
 if __name__ == '__main__':
