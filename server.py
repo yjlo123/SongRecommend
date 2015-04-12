@@ -3,7 +3,7 @@ import spotipy
 import spotipy.util as util
 from flask import Flask
 from flask import *
-# import tweets
+import tweets
 import fb
 
 os.environ['SPOTIPY_CLIENT_ID']     = '80d72b0f268d4e7db2ffd1e70d79be31'
@@ -23,20 +23,17 @@ def index():
     results = None
     profile = None
   twitter = request.args.get('twitter', '')
+  if twitter:
+    t = tweets.Tweets()
+    color = t.user_to_color(twitter)
 
-  return render_template('index.html', token=token, results=results, profile=profile, twitter=twitter)
+  return render_template('index.html', token=token, results=results, profile=profile, twitter=twitter, color=color)
 
 @app.route('/spotify')
 def spotify_login(username=None):
   scope = 'user-library-read user-follow-read user-read-private user-read-birthdate user-read-email'
   token = util.prompt_for_user_token(scope)
   return redirect(url_for('index', token = token))
-
-@app.route('/twitter/<username>')
-def twitter():
-  tweets.init()
-  colors = tweets.user_to_color(username)
-  return colors
 
 @app.route('/like', methods=[ 'POST' ])
 def like():
