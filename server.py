@@ -3,7 +3,7 @@ import spotipy
 import spotipy.util as util
 from flask import Flask
 from flask import *
-import tweets
+# import tweets
 import fb
 
 os.environ['SPOTIPY_CLIENT_ID']     = '80d72b0f268d4e7db2ffd1e70d79be31'
@@ -38,10 +38,10 @@ def twitter():
   colors = tweets.user_to_color(username)
   return colors
 
-@app.route('/like')
+@app.route('/like', methods=[ 'POST' ])
 def like():
-  fb.postToFireBase(color, None, song)
-  pass
+  # fb.postToFireBase(color, None, song)
+  return 'Added song to color'
 
 
 if __name__ == '__main__':

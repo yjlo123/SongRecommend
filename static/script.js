@@ -1,9 +1,15 @@
-$("#like").on('click', function() {
-  $.ajax({
-    type: "POST",
-    url: "/like",
-    data: {  },
-    dataType: 'json',
-    success: callback
+$(function() {
+  $("#like").on('click', function() {
+    console.log("Liked!");
+    $.ajax({
+      type: "POST",
+      url: "/like",
+      data: { color: null },
+      dataType: 'json',
+      success: function(data) {
+        console.log(result);
+      },
+      error: null
+    });
   });
 });
