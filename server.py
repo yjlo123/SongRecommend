@@ -26,6 +26,8 @@ def index():
   if twitter:
     t = tweets.Tweets()
     color = t.user_to_color(twitter)
+  else:
+    color = None
 
   return render_template('index.html', token=token, results=results, profile=profile, twitter=twitter, color=color)
 
