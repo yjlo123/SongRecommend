@@ -42,7 +42,10 @@ def getColorFromText(color_dict, str):
 	for w in  stemmed_words:
 		if w in color_dict:
 			color_count[color_dict[w]] += 1
-	print color_count
+	#print color_count
+	#return list of color sort by count:
+	#L = sorted(d.items(), key=lambda (k, v): v[1])
+	#map(lambda (k,v): k, L)
 	return max(color_count.iteritems(), key=operator.itemgetter(1))[0]
 
 

@@ -1,4 +1,5 @@
 from firebase import firebase
+import urllib2
 import socket
 
 firebase = firebase.FirebaseApplication('https://cs4242.firebaseio.com', None)
@@ -8,7 +9,7 @@ print result
 '''
 
 def postToFirebase(my_color, my_type, my_song):
-	my_ip = [(s.connect(('8.8.8.8', 80)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]
+	my_ip = urllib2.urlopen('http://ip.42.pl/raw').read()
 	firebase.post('/data', {'ip': my_ip, 'color': my_color, 'type': my_type, 'song': my_song})
 '''
 my_color = "red"
