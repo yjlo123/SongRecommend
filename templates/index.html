@@ -1,9 +1,19 @@
 {% extends "layout.html" %}
 {% block body %}
+  
+  {% if song %}
+  <h3>Current song:</h3>
+  <button id="like">Like</button>
+  <button id="next">Next</button><br>
+  <span id="current-song">{{ song }}</span><br>
+  <iframe src="https://embed.spotify.com/?uri={{ song }}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+  <br>
+  {% endif %}
+
   <!-- Spotify Login -->
   {% if profile %}
-    Logged in as {{ profile['display_name'] }}
-    <img src="{{ profile['images'][0]['url'] }}" style="width: 40px; border-radius: 50%;">
+    Logged in as {{ profile['email'] }}
+    <!-- Info: {{ profile }} -->
     <dl>
       <dt>Birthdate</dt>
       <dd>{{ profile['birthdate'] }}</dd>
@@ -15,7 +25,7 @@
     <a href="{{ url_for('spotify_login') }}">Login to Spotify</a>
   {% endif %}
 
-  {% if results %}
+<!--   {% if results %}
     <h3>List of Spotify tracks:</h3>
     <ul class=tracks>
     {% for item in results['items'] %}
@@ -27,12 +37,12 @@
 
   {% else %}
     <h3>Login to Spotify to get tracks!</h3>
-  {% endif %}
+  {% endif %} -->
 
   <!-- Twitter login -->
   {% if twitter %}
     <h2>Logged in to Twitter</h2>
-    Your color is <strong>{{ color }}</strong>
+    Your color is <strong id="current-color">{{ color }}</strong>
   {% else %}
     <h2>Login to Twitter</h2>
   {% endif %}
@@ -44,7 +54,5 @@
       <dd><input type=submit value=Login></dd>
     </dl>
   </form>
-
-  <button id="like">Like</button>
 
 {% endblock %}
