@@ -13,6 +13,7 @@ def init():
 	global my_color
 	my_name = raw_input('Enter your twitter name: ')
 	my_color = t.user_to_color(my_name)
+	print "Song base size: "+str(base.get_size())
 	print "=========================="
 	print "Your color is: "+my_color
 

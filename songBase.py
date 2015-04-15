@@ -23,6 +23,13 @@ class Songbase:
 						self._base[t][s].append(line.strip())
 		#pp.pprint(self._base)
 
+	def get_size(self):
+		count = 0;
+		for t in self._base:
+			for l in self._base[t]:
+				count = count + len(self._base[t][l])
+		return count;
+
 	def get_song(self, color, country, age, tracks):
 		song_type_list = self.color_to_type(color);
 		cur_type = song_type_list[randint(0,len(song_type_list)-1)]
