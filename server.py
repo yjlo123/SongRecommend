@@ -56,7 +56,7 @@ def spotify_login(username=None):
 def like():
   color = request.form['color']
   song = request.form['song']
-  fb.postToFireBase(color, "unknownType", song)
+  fb.postToFirebase(color, "unknownType", song)
   return 'Added song to color' 
 
 if __name__ == '__main__':

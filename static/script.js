@@ -1,6 +1,7 @@
 $(function() {
   $("#like").on('click', function() {
     console.log("Like!");
+    $("#like").text("Sending...");
     var color = $("#current-color").text();
     var song = $("#current-song").text();
     $.ajax({
@@ -8,9 +9,7 @@ $(function() {
       url: "/like",
       data: { color: color, song: song },
       dataType: 'json',
-      success: function(data) {
-        console.log(result);
-      },
+      success: $("#like").text("Liked!"),
       error: null
     });
   });
