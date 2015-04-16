@@ -65,3 +65,13 @@ class Songbase:
 		else:
 			type_list = ['blues','classical','country','dinner','focus','jazz','metal','party','pop','rock','romance','sleep','soul','travel','workout']
 		return type_list
+
+	def process_age(self, age, lst):
+		if age < 30:
+			lst = [ x for x in lst if x == 'blues' or x == 'jazz' ]
+			lst.append('pop')
+		return lst
+	def add_additional(self, more, lst):
+		for t in more:
+			lst.append(t)
+		return lst
