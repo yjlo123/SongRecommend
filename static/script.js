@@ -3,7 +3,7 @@ $(function() {
     console.log("Like!");
     $("#like").text("Sending...");
     var color = $("#current-color").text();
-    var song = $("#current-song").text();
+    var song = $("#current-song").attr("href");
     $.ajax({
       type: "POST",
       url: "/like",

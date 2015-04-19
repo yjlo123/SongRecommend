@@ -1,19 +1,140 @@
 {% extends "layout.html" %}
 {% block body %}
   
+{% if twitter %}
+{% else %}
+<div class="overlay">
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+
+
+
+      <div class="card card1">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="static/img/social_media.jpg">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">Enter your twitter username<i class="mdi-navigation-more-vert right"></i></span>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="twitter_username" type="text" class="validate">
+          <label for="email">Username</label>
+        </div>
+      </div>
+      <div class="center">
+          <a class="waves-effect waves-light btn set_twitter_btn"><i class="mdi-navigation-chevron-right right"></i>Next</a>
+        </div>
+        </div>
+
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Note <i class="mdi-navigation-close right"></i></span>
+          <p>The tweets of given username will be retrieved and downloaded in to lcoal disk. The maximum number of tweets downloaded in 3200, and they are stored under "tweets" folder.</p>
+        </div>
+      </div>
+
+
+      <div class="card card2">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="static/img/spotify.jpg">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">Login Spotify<i class="mdi-navigation-more-vert right"></i></span>
+
+          <br><br>
+      <div class="row center">
+          <a class="waves-effect waves-light btn" id="connect_spotify_btn" href="{{ url_for('spotify_login', twitter=username) }}">Connect with Spotify</a>
+      </div>
+
+        </div>
+
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Note <i class="mdi-navigation-close right"></i></span>
+          <p>Connect Song Recommendation to your Spotify account, Song Recommendation will be able to read your birth date, country, and saved tracks.</p>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+
+
+
+
+
+
   {% if song %}
-  <h3>Current song:</h3>
-  <button id="like">Like</button>
-  <button id="next">Next</button><br>
-  <span id="current-song">{{ song }}</span><br>
+<table style="width:540px; margin: 0 auto;">
+<tr>
+<td style="width:320px">
+    <div class="card">
+      <div class="card-content">
   <iframe src="https://embed.spotify.com/?uri={{ song }}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
-  <br>
+      </div>
+      <div class="card-action center">
+          <button id="like" class="waves-effect waves-light btn"><i class="mdi-action-favorite left"></i>Like</button>
+          <button id="next" class="waves-effect waves-light btn"><i class="mdi-content-forward left"></i>Next</button>
+      </div>
+    </div>
+</td>
+
+<td style="width:220px">
+    {% if profile %}
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+      <dl>
+        <dt>Twitter</dt>
+        <dd>{{ twitter }}</dd>
+        <dt>Email</dt>
+        <dd>{{ profile['email'] }}</dd>
+        <dt>Color</dt>
+        <dd id="current-color"><strong>{{color}}</strong></dd>
+        <dt>Birthdate</dt>
+        <dd>{{ profile['birthdate'] }}</dd>
+        <dt>Country</dt>
+        <dd>{{ profile['country'] }}</dd>
+        <dt>Current song URI</dt>
+        <dd><a href="{{ song }}" target="_blank" id="current-song">Open in a new tab</a></dd>
+      </dl>
+      </div>
+      <div class="card-action">
+        <a href="/home">Back to home</a>
+      </div>
+    </div>
+
+    {% endif %}
+</td>
+</tr>
+</table>
+</div>
+
+
+
+<!-- song url
+  <span id="current-song">{{ song }}</span><br>
+-->
+
+
+<style>
+html{
+  height: 100%;
+  background-color: #e0e0e0;
+}
+</style>
+
   {% endif %}
 
+
+
   <!-- Spotify Login -->
+      <!--
   {% if profile %}
     Logged in as {{ profile['email'] }}
-    <!-- Info: {{ profile }} -->
+
     <dl>
       <dt>Birthdate</dt>
       <dd>{{ profile['birthdate'] }}</dd>
@@ -21,9 +142,12 @@
       <dd>{{ profile['country'] }}</dd>
     </dl>
     
+
+
   {% else %}
     <a href="{{ url_for('spotify_login') }}">Login to Spotify</a>
   {% endif %}
+-->
 
 <!--   {% if results %}
     <h3>List of Spotify tracks:</h3>
@@ -40,6 +164,9 @@
   {% endif %} -->
 
   <!-- Twitter login -->
+
+
+  <!--
   {% if twitter %}
     <h2>Twitter details</h2>
     Your color is <strong id="current-color">{{ color }}</strong>
@@ -54,5 +181,6 @@
       <dd><input type=submit value=Submit></dd>
     </dl>
   </form>
+-->
 
 {% endblock %}

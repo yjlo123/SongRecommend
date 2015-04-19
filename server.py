@@ -50,7 +50,8 @@ def index():
 def spotify_login(username=None):
   scope = 'user-library-read user-follow-read user-read-private user-read-birthdate user-read-email'
   token = util.prompt_for_user_token('new', scope)
-  return redirect(url_for('index', token = token))
+  twitter = request.args.get('twitter', '')
+  return redirect(url_for('index', token = token, twitter = twitter))
 
 @app.route('/like', methods=[ 'POST' ])
 def like():
@@ -58,6 +59,10 @@ def like():
   song = request.form['song']
   fb.postToFirebase(color, "unknownType", song)
   return 'Added song to color' 
+
+@app.route('/home')
+def home():
+  return render_template('home.html')
 
 if __name__ == '__main__':
   app.debug = True
