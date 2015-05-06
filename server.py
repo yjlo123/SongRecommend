@@ -20,6 +20,32 @@ def calculate_age(born):
   today = date.today()
   return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
+def color_to_code(color):
+  if color == "white":
+    return "#fafafa"
+  elif color == "black":
+    return "#757575"
+  elif color == "red":
+    return "#ffcdd2"
+  elif color == "green":
+    return "#c8e6c9"
+  elif color == "yellow":
+    return "#fff9c4"
+  elif color == "blue":
+    return "#bbdefb"
+  elif color == "brown":
+    return "#d7ccc8"
+  elif color == "pink":
+    return "#f8bbd0"
+  elif color == "purple":
+    return "#e1bee7"
+  elif color == "orange":
+    return "#ffe0b2"
+  elif color == "grey":
+    return "#e0e0e0"
+  else:
+    return "#e0e0e0"
+
 @app.route('/')
 def index():
   token = request.args.get('token', '')
@@ -44,7 +70,7 @@ def index():
     profile = None
     song    = None
 
-  return render_template('index.html', token=token, results=results, profile=profile, twitter=twitter, color=color, song=song)
+  return render_template('index.html', token=token, results=results, profile=profile, twitter=twitter, color=color, colorcode=color_to_code(color), song=song)
 
 @app.route('/spotify')
 def spotify_login(username=None):

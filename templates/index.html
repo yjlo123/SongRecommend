@@ -74,11 +74,22 @@
 
 
   {% if song %}
-<table style="width:540px; margin: 0 auto;">
+<table style="width:320px; margin: 0 auto;">
 <tr>
 <td style="width:320px">
     <div class="card">
+    <div class="card-action">
+      <div class="nav-button" style="float: left;">
+        <a href="/home"><i class="mdi-navigation-arrow-back left"></i>Home</a>
+      </div>
+      <div class="nav-button" style="float: right;">
+        <a href="{{ song }}" target="_blank"><i class="mdi-av-my-library-music left"></i>Spotify</a>
+      </div>
+    </div>
       <div class="card-content">
+
+    
+
   <iframe src="https://embed.spotify.com/?uri={{ song }}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
       </div>
       <div class="card-action center">
@@ -87,7 +98,7 @@
       </div>
     </div>
 </td>
-
+<!--
 <td style="width:220px">
     {% if profile %}
     <div class="card blue-grey darken-1">
@@ -114,6 +125,7 @@
 
     {% endif %}
 </td>
+-->
 </tr>
 </table>
 </div>
@@ -128,7 +140,10 @@
 <style>
 html{
   height: 100%;
-  background-color: #e0e0e0;
+  background-color: {{ colorcode }}
+}
+.nav-button{
+  display: inline-block
 }
 </style>
 
